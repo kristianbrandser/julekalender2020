@@ -1,14 +1,16 @@
-import numpy
-from julekalender2020 import isPrime
+import numpy, sympy
+#from julekalender2020 import isPrime
 
 #10 => 7
 #20 => 9
 #10000 => 32
-#5433000 =>
+#100000 => 51?
+#5433000 => 
 
 allepakker = list(range(0,5433000,1))
 kastedepakker = []
 lastprime = 0
+nLevertepakker = 0
 
 for pakke in allepakker:
     
@@ -24,20 +26,24 @@ for pakke in allepakker:
         #    if isPrime(i):
         #        lastprime = i
         
-        fantprime = False
-        i = pakke
+        ##fantprime = False
+        ##i = pakke
 
-        while not fantprime:
-                if isPrime(i):
-                    lastprime = i
-                    fantprime = True
-                else:
-                    i -= 1
-
+        ##while not fantprime:
+        ##        if isPrime(i):
+        ##            lastprime = i
+        ##            fantprime = True
+        ##        else:
+        ##            i -= 1
+        lastprime = sympy.prevprime(pakke+1)
+        nLevertepakker = pakke - len(kastedepakker) 
         kastedepakker.extend(allepakker[pakke:pakke+lastprime+1])
-      
-levertepakker = numpy.setdiff1d(allepakker, kastedepakker)
+        
 
-print("Antall leverte pakker: ", len(levertepakker))
-print(levertepakker)
+#Slow?   
+#levertepakker = numpy.setdiff1d(allepakker, kastedepakker)
+
+#print("Antall leverte pakker: ", len(levertepakker))
+print("Antall leverte pakker: ", nLevertepakker)
+#print(levertepakker)
 
